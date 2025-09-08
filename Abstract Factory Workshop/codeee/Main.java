@@ -3,21 +3,10 @@ package codeee;
 import java.util.Scanner;
 
 // ---------------- INTERFACES ----------------
-interface Starter {
-    void eat();
-}
-
-interface MainDish {
-    void eat();
-}
-
-interface Drink {
-    void drink();
-}
-
-interface Dessert {
-    void eat();
-}
+interface Starter { void eat(); }
+interface MainDish { void eat(); }
+interface Drink { void drink(); }
+interface Dessert { void eat(); }
 
 interface MenuFactory {
     Starter createStarter();
@@ -29,121 +18,73 @@ interface MenuFactory {
 // ---------------- GOURMET ----------------
 class GourmetStarter implements Starter {
     @Override
-    public void eat() {
-        System.out.println("Comiendo una entrada gourmet...");
-    }
+    public void eat() { System.out.println("Comiendo un Carpaccio de res :)"); }
 }
-
 class GourmetMainDish implements MainDish {
     @Override
-    public void eat() {
-        System.out.println("Disfrutando un plato principal gourmet...");
-    }
+    public void eat() { System.out.println("Disfrutando un Filete Mignon con salsa de trufas :)"); }
 }
-
 class GourmetDrink implements Drink {
     @Override
-    public void drink() {
-        System.out.println("Bebiendo un vino gourmet...");
-    }
+    public void drink() { System.out.println("Bebiendo un vino tinto de reserva :)"); }
 }
-
 class GourmetDessert implements Dessert {
     @Override
-    public void eat() {
-        System.out.println("Saboreando un postre gourmet...");
-    }
+    public void eat() { System.out.println("Saboreando un postre de chocolate 70% :)"); }
 }
-
 class GourmetFactory implements MenuFactory {
-    @Override
-    public Starter createStarter() { return new GourmetStarter(); }
-    @Override
-    public MainDish createMainDish() { return new GourmetMainDish(); }
-    @Override
-    public Drink createDrink() { return new GourmetDrink(); }
-    @Override
-    public Dessert createDessert() { return new GourmetDessert(); }
+    @Override public Starter createStarter() { return new GourmetStarter(); }
+    @Override public MainDish createMainDish() { return new GourmetMainDish(); }
+    @Override public Drink createDrink() { return new GourmetDrink(); }
+    @Override public Dessert createDessert() { return new GourmetDessert(); }
 }
 
 // ---------------- HEALTHY ----------------
 class HealthyStarter implements Starter {
     @Override
-    public void eat() {
-        System.out.println("Comiendo una ensalada saludable...");
-    }
+    public void eat() { System.out.println("Comiendo una ensalada de quinoa con aguacate :)"); }
 }
-
 class HealthyMainDish implements MainDish {
     @Override
-    public void eat() {
-        System.out.println("Disfrutando un bowl nutritivo...");
-    }
+    public void eat() { System.out.println("Disfrutando un bowl nutritivo con pollo a la parrilla :)"); }
 }
-
 class HealthyDrink implements Drink {
     @Override
-    public void drink() {
-        System.out.println("Bebiendo un jugo verde saludable...");
-    }
+    public void drink() { System.out.println("Bebiendo un jugo verde saludable con espinacas :)"); }
 }
-
 class HealthyDessert implements Dessert {
     @Override
-    public void eat() {
-        System.out.println("Saboreando un postre bajo en calorías...");
-    }
+    public void eat() { System.out.println("Saboreando un postre de yogurt griego con miel y nueces :)"); }
 }
-
 class HealthyFactory implements MenuFactory {
-    @Override
-    public Starter createStarter() { return new HealthyStarter(); }
-    @Override
-    public MainDish createMainDish() { return new HealthyMainDish(); }
-    @Override
-    public Drink createDrink() { return new HealthyDrink(); }
-    @Override
-    public Dessert createDessert() { return new HealthyDessert(); }
+    @Override public Starter createStarter() { return new HealthyStarter(); }
+    @Override public MainDish createMainDish() { return new HealthyMainDish(); }
+    @Override public Drink createDrink() { return new HealthyDrink(); }
+    @Override public Dessert createDessert() { return new HealthyDessert(); }
 }
 
 // ---------------- VEGETARIAN ----------------
 class VegetarianStarter implements Starter {
     @Override
-    public void eat() {
-        System.out.println("Comiendo una entrada vegetariana...");
-    }
+    public void eat() { System.out.println("Comiendo una crema de calabaza con crutones :)"); }
 }
-
 class VegetarianMainDish implements MainDish {
     @Override
-    public void eat() {
-        System.out.println("Disfrutando un plato principal vegetariano...");
-    }
+    public void eat() { System.out.println("Disfrutando una Lasaña de berenjena con queso ricotta :)"); }
 }
-
 class VegetarianDrink implements Drink {
     @Override
-    public void drink() {
-        System.out.println("Bebiendo una limonada vegetariana...");
-    }
+    public void drink() { System.out.println("Bebiendo un jugo natural de frutos rojos :)"); }
 }
-
 class VegetarianDessert implements Dessert {
     @Override
-    public void eat() {
-        System.out.println("Saboreando un postre vegetariano...");
-    }
+    public void eat() { System.out.println("Saboreando un cheesecake de frutas :)"); }
 }
-
 class VegetarianFactory implements MenuFactory {
-    @Override
-    public Starter createStarter() { return new VegetarianStarter(); }
-    @Override
-    public MainDish createMainDish() { return new VegetarianMainDish(); }
-    @Override
-    public Drink createDrink() { return new VegetarianDrink(); }
-    @Override
-    public Dessert createDessert() { return new VegetarianDessert(); }
+    @Override public Starter createStarter() { return new VegetarianStarter(); }
+    @Override public MainDish createMainDish() { return new VegetarianMainDish(); }
+    @Override public Drink createDrink() { return new VegetarianDrink(); }
+    @Override public Dessert createDessert() { return new VegetarianDessert(); }
 }
 
 // ---------------- CLIENT ----------------
@@ -171,19 +112,32 @@ public class Main {
             }
         };
 
-        // Crear menú
         if (factory != null) {
             Starter starter = factory.createStarter();
             MainDish mainDish = factory.createMainDish();
             Drink drink = factory.createDrink();
             Dessert dessert = factory.createDessert();
 
-            // Simulación de comer
-            System.out.println("\n--- Su menú está listo ---");
-            starter.eat();
-            mainDish.eat();
-            drink.drink();
-            dessert.eat();
+            int choice;
+            do {
+                System.out.println("\n--- Menú interactivo ---");
+                System.out.println("1. Comer entrada");
+                System.out.println("2. Comer plato principal");
+                System.out.println("3. Beber bebida");
+                System.out.println("4. Comer postre");
+                System.out.println("0. Salir");
+                System.out.print("Elige una opción: ");
+                choice = sc.nextInt();
+
+                switch (choice) {
+                    case 1 -> starter.eat();
+                    case 2 -> mainDish.eat();
+                    case 3 -> drink.drink();
+                    case 4 -> dessert.eat();
+                    case 0 -> System.out.println("Saliendo del restaurante...");
+                    default -> System.out.println("Opción inválida.");
+                }
+            } while (choice != 0);
         }
 
         sc.close();
