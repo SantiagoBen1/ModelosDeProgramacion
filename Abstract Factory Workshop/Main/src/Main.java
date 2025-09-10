@@ -1,5 +1,3 @@
-package codeee;     //Paquete donde está conetenido el código
-
 import java.util.Scanner;   //Importamos la clase Scanner para leer entradas del usuario
 
 // ---------------- INTERFACES ----------------
