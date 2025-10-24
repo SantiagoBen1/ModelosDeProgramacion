@@ -4,8 +4,21 @@ import model.Point;
 import model.Preferences;
 import model.Route;
 
-/** Estrategia para ciclistas. */
+/**
+ * Estrategia para planificar rutas en bicicleta.
+ * Aplica un factor de atajo por ciclovías y ajusta la velocidad si se prefiere una ruta escénica.
+ */
 public class CyclingRouteStrategy implements RouteStrategy {
+    /**
+     * Calcula una ruta en bicicleta entre dos puntos usando distancia Haversine
+     * y simples heurísticas relacionadas con rutas escénicas y ciclovías.
+     *
+     * @param map datos del mapa (no utilizados en este stub)
+     * @param start punto de partida
+     * @param end punto de destino
+     * @param prefs preferencias del usuario; se usa {@code isScenic()} para ajustar velocidad
+     * @return ruta estimada con pasos básicos de navegación
+     */
     @Override
     public Route planRoute(MapData map, Point start, Point end, Preferences prefs) {
         double distance = haversineKm(start, end) * 0.95; // atajos por ciclovías
@@ -18,6 +31,13 @@ public class CyclingRouteStrategy implements RouteStrategy {
         ));
     }
 
+    /**
+     * Distancia aproximada entre dos coordenadas geográficas usando Haversine.
+     *
+     * @param a punto origen
+     * @param b punto destino
+     * @return distancia en kilómetros
+     */
     private static double haversineKm(Point a, Point b) {
         double R = 6371.0; // km
         double dLat = Math.toRadians(b.getLat() - a.getLat());

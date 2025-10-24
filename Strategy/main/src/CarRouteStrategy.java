@@ -4,12 +4,22 @@ import model.Point;
 import model.Preferences;
 import model.Route;
 
-interface RouteStrategy {
-    Route planRoute(MapData map, Point start, Point end, Preferences prefs);
-}
-
-/** Estrategia por carretera/auto. */
+/**
+ * Estrategia para planificar rutas en automóvil.
+ * Considera una velocidad promedio configurable de forma simplificada y la
+ * preferencia de evitar peajes para ajustar la duración estimada.
+ */
 public class CarRouteStrategy implements RouteStrategy {
+    /**
+     * Calcula una ruta en coche entre dos puntos utilizando una aproximación
+     * por distancia Haversine y heurísticas simples para estimar duración.
+     *
+     * @param map datos del mapa disponibles (no utilizados en esta implementación de ejemplo)
+     * @param start punto de partida
+     * @param end punto de destino
+     * @param prefs preferencias del usuario; se usa {@code isAvoidTolls()} para ajustar la velocidad
+     * @return una instancia de {@link Route} con distancia estimada, duración y pasos de guía
+     */
     @Override
     public Route planRoute(MapData map, Point start, Point end, Preferences prefs) {
         double distance = haversineKm(start, end);
@@ -23,6 +33,13 @@ public class CarRouteStrategy implements RouteStrategy {
         ));
     }
 
+    /**
+     * Calcula la distancia en kilómetros entre dos coordenadas geográficas usando la fórmula de Haversine.
+     *
+     * @param a punto origen con latitud/longitud en grados decimales
+     * @param b punto destino con latitud/longitud en grados decimales
+     * @return distancia aproximada en kilómetros sobre la superficie terrestre
+     */
     private static double haversineKm(Point a, Point b) {
         double R = 6371.0; // km
         double dLat = Math.toRadians(b.getLat() - a.getLat());

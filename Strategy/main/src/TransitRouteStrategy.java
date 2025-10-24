@@ -5,8 +5,21 @@ import model.Point;
 import model.Preferences;
 import model.Route;
 
-/** Estrategia usando transporte público. */
+/**
+ * Estrategia que estima un trayecto usando transporte público, con posibles transbordos
+ * y tramos de acceso/salida a pie. Aplica penalización por número de transbordos.
+ */
 public class TransitRouteStrategy implements RouteStrategy {
+    /**
+     * Calcula la ruta en transporte público entre dos puntos, estimando distancia total,
+     * número de transbordos y duración basada en una velocidad promedio.
+     *
+     * @param map datos del mapa (no utilizados en este stub)
+     * @param start punto de origen
+     * @param end punto de destino
+     * @param prefs preferencias; se usa {@code getMaxTransfers()} para limitar transbordos
+     * @return ruta con pasos que incluyen caminar, tomar líneas y transbordos
+     */
     @Override
     public Route planRoute(MapData map, Point start, Point end, Preferences prefs) {
         double distance = haversineKm(start, end) * 1.1; // desvíos por líneas
@@ -24,6 +37,13 @@ public class TransitRouteStrategy implements RouteStrategy {
         return new Route(distance, durationMin, steps);
     }
 
+    /**
+     * Distancia aproximada entre dos puntos geográficos con Haversine.
+     *
+     * @param a inicio del tramo
+     * @param b fin del tramo
+     * @return distancia en kilómetros
+     */
     private static double haversineKm(Point a, Point b) {
         double R = 6371.0; // km
         double dLat = Math.toRadians(b.getLat() - a.getLat());
